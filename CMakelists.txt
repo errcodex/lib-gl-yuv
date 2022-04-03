@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.10)
+
+set(VCPKG_TARGET_TRIPLET x86-windows-static-md)
+# depedents
+# glew:x86-windows-static-md, glfw3:x86-windows-static-md 
+
+project(lib-gl-yuv CXX)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(soil2 CONFIG REQUIRED)
+
+add_executable(${PROJECT_NAME} test/main.cpp src/YUV420Pimpl.h src/YUV420Pimpl.cpp include/YUV420P.h src/YUV420P.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw GLEW::GLEW soil2 opengl32)
